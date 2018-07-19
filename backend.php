@@ -1,18 +1,15 @@
 <?php 
-// require_once 'classes/conexao.class.php';
+require_once 'classes/conexao.class.php';
 
-// if(    isset($_POST['nome']) 
-//     && isset($_POST['email']) 
-//     && isset($_POST['telefone'])
-//     && isset($_POST['descricao'])
+if( isset($_POST['usuario'])){
 
-// $values = array(
-//     'nome' => $_POST['nome'],
-//     'email' => $_POST['email'],
-//     'telefone' => $_POST['telefone'],
-//     'descricao' => $_POST['descricao']
-// )
-// var_dump($values);
-
-echo $_POST['nome'];
+    $values = array(
+    'nome' => $_POST['usuario']['nome'],
+    'email' => $_POST['usuario']['email'],
+    'telefone' => $_POST['usuario']['telefone'],
+    'descricao' => $_POST['usuario']['descricao']
+    );
+    $banco = new Insert();
+    $banco->inserir_usuario($values['nome'], $values['email'], $values['telefone'], $values['descricao']);
+}
 ?>

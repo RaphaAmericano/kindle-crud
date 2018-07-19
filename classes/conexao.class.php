@@ -3,10 +3,11 @@ require_once 'insert.class.php';
 require_once 'select.class.php';
 class Conexao {
 
-    private static $con = null;
+    protected static $con = null;
 
     public function __construct(){
-        die();
+        self::conectar();
+        //die();
     }
 
     public static function conectar(){
