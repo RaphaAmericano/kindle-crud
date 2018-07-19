@@ -1,7 +1,7 @@
 <?php 
 require_once 'classes/conexao.class.php';
 
-if( isset($_POST['usuario'])){
+if( isset($_POST['novo'])){
 
     $values = array(
     'nome' => $_POST['usuario']['nome'],

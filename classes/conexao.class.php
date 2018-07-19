@@ -13,7 +13,7 @@ class Conexao {
     public static function conectar(){
         if(null == self::$con) {
             try{
-                self::$con = new PDO("mysql:host=localhost;dbname=kindle", "root", "");
+                self::$con = new PDO("mysql:host=localhost;dbname=kindle;charset=utf8;", "root", "");
             }catch(PDOException $e){
                 die($e->getCode());
             }

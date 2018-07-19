@@ -1,29 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <?php 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-    ?>
-    <?php require_once 'classes/conexao.class.php'; ?>
-</head>
+<?php include('header.php'); ?>
 <body>
 
 <h2>Cadastrar Usuario</h2>
 <form action="backend.php" method="POST">
     <label for="nome">Nome</label>
-    <input type="text" name="usuario[nome]">
+    <input type="text" name="novo[nome]">
     <label for="email">Email</label>
-    <input type="email" name="usuario[email]">
+    <input type="email" name="novo[email]">
     <label for="telefone">Telefone</label>
-    <input type="tel" name="usuario[telefone]">
+    <input type="tel" name="novo[telefone]">
     <label for="descricao">Descrição</label>
-    <textarea name="usuario[descricao]" ></textarea>
+    <textarea name="novo[descricao]" ></textarea>
     <input type="submit" value="enviar">
 </form>
 
@@ -34,11 +21,16 @@ $usuarios = new Select();
 $linhas = $usuarios->selecionar_todos();
 
 if(!empty($linhas)): ?>
-<select name="usuarios">
-<?php foreach ($linhas as $chave) {
-    print '<option value="'.$chave['ID'].'">'.$chave['NOME'].'</option>';
-} ?>
-</select>
+<form action="usuario.php" method="post">
+    <select name="usuarios">
+    <?php foreach ($linhas as $chave) {
+        print '<option value="'.$chave['ID'].'">'.$chave['NOME'].'</option>';
+    } ?>
+    </select>
+    <input type="submit" value="selecionar">
+</form>
+<?php else: ?>
+<h3>Não há usuários</h3>
 <?php endif; ?>
 </body>
 </html>
