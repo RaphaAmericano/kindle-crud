@@ -1,9 +1,10 @@
 <?php include('header.php'); 
 $banco = new Select();
-$agenda = $banco->selecionar_eventos();
+
 if(isset($_GET['usuarios'])){
     $usuario = $_GET['usuarios'];
     $retorno = $banco->selecionar_usuario($usuario);
+    $agenda = $banco->selecionar_eventos($usuario);
 } 
 
 if(isset($_POST['edita'])){ 
@@ -24,10 +25,10 @@ if(isset($_POST['edita'])){
     $retorno = $banco->selecionar_usuario($_POST['edita']['id']);
 }
 if(isset($_POST['agenda'])){
-    print $_POST['agenda']['dia'];
-    print $_POST['agenda']['horario'];
     $insert_agenda = new Insert();
     $evento = $insert_agenda->inserir_evento($_POST['agenda']['id'], $_POST['agenda']['descricao'], $_POST['agenda']['nome'], $_POST['agenda']['dia'],$_POST['agenda']['horario']);
+    $retorno = $banco->selecionar_usuario($_POST['agenda']['id']);
+    $agenda = $banco->selecionar_eventos($_POST['agenda']['id']);
 }
 
 ?>
@@ -49,7 +50,6 @@ if(isset($_POST['agenda'])){
     <tr>
         <th colspan="4">Editar</th>
     </tr>
-    
     <tr>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">    
             <td><input placeholder="<?php echo $retorno['NOME'] ?>" type="text" name="edita[nome]"></td>
@@ -63,7 +63,6 @@ if(isset($_POST['agenda'])){
 </table>
 
 <h2>Agenda</h2>
-
 <table>
     <tr>
         <th>Título</th>
@@ -71,7 +70,6 @@ if(isset($_POST['agenda'])){
         <th>Data</th>
     </tr>
     <?php if(!empty($agenda)):?>
-
 
     <?php else: ?>
     <tr>

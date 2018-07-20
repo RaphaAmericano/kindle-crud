@@ -18,8 +18,10 @@ class Select extends Conexao {
         return $retorno;
     }
     
-    public static function selecionar_eventos(){
-        $statement = self::$con->prepare("SELECT * FROM AGENDA");
+    public static function selecionar_eventos($id){
+        
+        $statement = self::$con->prepare("SELECT * FROM USUARIO INNER JOIN AGENDA ON USUARIO.ID=AGENDA.USUARIO_ID WHERE USUARIO.ID = :id");
+        $statement.bindParam(":id", $id);
         $statement->execute();
         $retorno = $statement->fetchAll(PDO::FETCH_ASSOC); 
         return $retorno;

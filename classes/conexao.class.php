@@ -2,6 +2,7 @@
 require_once 'insert.class.php';
 require_once 'select.class.php';
 require_once 'update.class.php';
+require_once 'delete.class.php';
 class Conexao {
 
     protected static $con = null;
