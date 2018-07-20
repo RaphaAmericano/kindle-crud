@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php include('header.php'); ?>
 <body>
 
@@ -10,7 +12,7 @@
     <label for="telefone">Telefone</label>
     <input type="tel" name="novo[telefone]">
     <label for="descricao">Descrição</label>
-    <textarea name="novo[descricao]" ></textarea>
+    <textarea name="novo[descricao]"></textarea>
     <input type="submit" value="enviar">
 </form>
 
@@ -18,20 +20,20 @@
 
 <?php 
 $usuarios = new Select();
-$linhas = $usuarios->selecionar_todos();
+$linhas = $usuarios->selecionar_todos('USUARIO');
+
 
 if(!empty($linhas)): ?>
-<form action="usuario.php" method="post">
+<form action="usuario.php" method="get">
     <select name="usuarios">
     <?php foreach ($linhas as $chave) {
         print '<option value="'.$chave['ID'].'">'.$chave['NOME'].'</option>';
     } ?>
     </select>
-    <input type="submit" value="selecionar">
+    <input type="submit" value="Selecionar">
 </form>
-<?php else: ?>
-<h3>Não há usuários</h3>
 <?php endif; ?>
+
 </body>
 </html>
 

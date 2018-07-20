@@ -14,6 +14,19 @@ class Insert extends Conexao {
         return $exec;
     }
 
+    public static function inserir_evento( $usuario, $descricao, $titulo, $dia, $horario){
+        
+        $data_evento = $dia.' '.$horario.':00';
+
+        $sql = "INSERT INTO AGENDA (USUARIO_ID, DESCRICAO, TITULO, DATA_) VALUES ( :id_usuario, :descricao, :titulo, :data_)";
+        $statement = self::$con->prepare($sql);
+        $statement->bindParam(':id_usuario', $usuario, PDO::PARAM_STR);
+        $statement->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+        $statement->bindParam(':titulo', $titulo,PDO::PARAM_STR);
+        $statement->bindParam(':data_', $data_evento, PDO::PARAM_STR);
+        $exec = $statement->execute();
+        return $exec;
+    }
 }
 
 ?>
