@@ -31,8 +31,8 @@
         </form>
     </tr>
 </table>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-    <input type="hidden" name="apagar">
+<form action="index.php" method="POST">
+    <input type="hidden" name="apagar[id]" value="<?php echo $retorno['ID']; ?>">
     <input type="submit" value="apagar">
 </form>
 
@@ -49,11 +49,13 @@
     <?php foreach ($agenda as $key ): ?>   
     <?php if($key['USUARIO_ID'] == $retorno['ID']): ?>
     <tr>         
-        <td><?php print $key['USUARIO_ID']; ?></td>
         <td><?php print $key['TITULO']; ?></td>
         <td><?php print $key['DESCRICAO']; ?></td>
         <td><time datetime="<?php print $key['DATA_']; ?>"><?php print $key['DATA_']; ?></time></td>
-        <td><button class="btn_editar" value="<?php print $key["ID"]; ?>">Editar</button><button class="btn_apagar" value="<?php print $key["ID"]; ?>">Apagar</button></td>
+        <td>
+            <button class="btn_editar" value="<?php print $key["ID"]; ?>">Editar</button>
+            <button class="btn_apagar" value="<?php print $key["ID"]; ?>">Apagar</button>
+        </td>
     </tr>
     <?php endif; ?>
     <?php endforeach ?>
@@ -63,6 +65,13 @@
     </tr>
     <?php endif; ?>
 </table>
+<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" style="display:none;" class="form_apagar_evento">
+    <label for="">Confirme:</label>
+    <input type="hidden" name="apagar_evento[id]" value="0">
+    <input type="hidden" name="apagar_evento[id_usuario]" value="<?php echo $retorno['ID']; ?>">
+    <input type="submit" value="Apagar">
+</form>
+
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" style="display:none;" class="form_editar_evento">
     <h3>Editar Evento</h3>
     <label for="agenda_edita[nome]">Nome</label>

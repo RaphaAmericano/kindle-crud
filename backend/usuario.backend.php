@@ -48,4 +48,14 @@ if(isset($_POST['agenda_edita'])){
     $agenda = $banco->selecionar_eventos($_POST['agenda_edita']['id_usuario']);
 }
 
+if(isset($_POST['apagar_evento'])){
+
+    $apagar_evento = new Delete();
+    if(!empty($_POST['apagar_evento']['id'])){
+        $apagar_evento->deletar_evento($_POST['apagar_evento']['id']);
+    };
+    $retorno = $banco->selecionar_usuario($_POST['apagar_evento']['id_usuario']);
+    $agenda = $banco->selecionar_eventos($_POST['apagar_evento']['id_usuario']);
+}
+//print_r($agenda);
 ?>

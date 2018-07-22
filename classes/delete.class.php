@@ -8,7 +8,7 @@ class Delete extends Conexao {
     }
 
     public static function deletar_evento( $id ){
-        $sql = "DELETE * FROM AGENDA WHERE ID = :id";
+        $sql = "DELETE FROM AGENDA WHERE ID = :id";
         $statement = self::$con->prepare($sql);
         $statement->bindParam(":id", $id);
         $statement->execute();
