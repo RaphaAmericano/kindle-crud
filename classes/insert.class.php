@@ -2,7 +2,6 @@
 class Insert extends Conexao {
     
     public static function inserir_usuario( $usuario, $email, $telefone, $descricao){
-     
         $sql = "INSERT INTO USUARIO (NOME, EMAIL, TELEFONE, DESCRICAO) VALUES ( :nome, :email, :telefone, :descricao)";
         $statement = self::$con->prepare($sql);
         $statement->bindParam(':nome', $usuario, PDO::PARAM_STR);

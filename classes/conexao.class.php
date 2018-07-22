@@ -27,15 +27,27 @@ class Conexao {
         self::$con = null;
     }
     //Verificações
-    public function verifica_nome(){
-        return;
+    public function verifica_nome($valor){
+        if(!empty($valor)){
+            $valor = trim($valor);
+            return $valor;
+        }
+        return false;
     }
 
-    public function verifica_email(){
-        return;
+    public function verifica_email($valor){
+        $valor = trim($valor);
+        if(filter_var($valor, FILTER_VALIDATE_EMAIL)){
+            return $valor;
+        }
+        return false;
     }
 
-    public function verifica_telefone(){
+    public function verifica_telefone($valor){
+        $valor = trim($valor);
+        if($valor == 10 || $valor == 11){
+
+        }
         return;
     }
 

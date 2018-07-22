@@ -12,13 +12,11 @@
     <label for="email">Email</label>
     <input type="email" name="novo[email]">
     <label for="telefone">Telefone</label>
-    <input type="tel" name="novo[telefone]">
+    <input type="tel" name="novo[telefone]" maxlength="11" minlength="10">
     <label for="descricao">Descrição</label>
     <textarea name="novo[descricao]"></textarea>
     <input type="submit" value="enviar">
 </form>
-
-
 
 <h2>Lista de Usuarios</h2>
 

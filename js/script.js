@@ -7,6 +7,7 @@
     $campo_id_form = document.getElementsByName("agenda_edita[id]")[0];
     $campo_id_apagar_form = document.getElementsByName("apagar_evento[id]")[0];
 
+    //Botões Editar
     if($botoes_editar.length > 0 ){
         var $inputs_editar = document.querySelectorAll('form.form_editar_evento input');
         $inputs_editar = [].slice.call($inputs_editar);
@@ -35,7 +36,8 @@
                 } 
             });
         }
-    } 
+    }  
+    //Botões apagar
     if($botoes_apagar.length > 0 ){
         for(var i = 0; i < $botoes_apagar.length; i++ ){
             $botoes_apagar[i].addEventListener("click", function(){
@@ -49,5 +51,31 @@
             });
         }
     }
-    
+    // Formulario cadastro
+    $form_cadastro_usuario = document.getElementsByTagName('form')[0];
+    $form_cadastro_usuario.addEventListener('submit', function(e){
+        var nome = $form_cadastro_usuario.getElementsByTagName('input')[0].value;
+        var email = $form_cadastro_usuario.getElementsByTagName('input')[1].value;
+        var telefone = $form_cadastro_usuario.getElementsByTagName('input')[2].value;
+        var descricao = $form_cadastro_usuario.getElementsByTagName('textarea')[0].textContent;
+
+        if(validar_email(email) == false ){
+            e.preventDefault();    
+            alert("Email Invalido");
+        }
+
+        if(telefone.match(/[a-z]/i) || telefone.match(/[!@#$%^&*(),.?":{}|<>]/g) ){
+            e.preventDefault();    
+            alert("Telefone invalido");
+        }
+
+    }); 
+
+    //funcoes de validacao
+    function validar_email(valor){
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(valor).toLowerCase());
+    }
+
+
 }());

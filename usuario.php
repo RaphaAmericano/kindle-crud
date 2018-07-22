@@ -75,13 +75,13 @@
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" style="display:none;" class="form_editar_evento">
     <h3>Editar Evento</h3>
     <label for="agenda_edita[nome]">Nome</label>
-    <input type="text" name="agenda_edita[nome]">
+    <input type="text" name="agenda_edita[nome]" placeholder="">
     <label for="agenda_edita[descricao]">Dia</label>
-    <input type="date" name="agenda_edita[dia]">
+    <input type="date" name="agenda_edita[dia]" placeholder="">
     <label for="agenda_edita[descricao]">Horário</label>
-    <input type="time" name="agenda_edita[horario]">
+    <input type="time" name="agenda_edita[horario]" placeholder="">
     <label for="agenda_edita[descricao]">Descricão</label>
-    <textarea name="agenda_edita[descricao]"></textarea>
+    <textarea name="agenda_edita[descricao]" placeholder=""></textarea>
     <input type="submit" value="Editar">
     <input type="hidden" name="agenda_edita[id_usuario]" value="<?php echo $retorno['ID']; ?>">
     <input type="hidden" name="agenda_edita[id]" value="0">

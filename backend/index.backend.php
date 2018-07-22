@@ -9,6 +9,7 @@ if( isset($_POST['novo'])){
     'descricao' => $_POST['novo']['descricao']
     );
     $banco = new Insert();
+    
     $banco->inserir_usuario($values['nome'], $values['email'], $values['telefone'], $values['descricao']);
 }
 
