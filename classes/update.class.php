@@ -24,6 +24,27 @@ class Update extends Conexao {
         $statement->bindParam(":id", $id);
         $statement->execute();
     }
+
+    public static function alterar_evento( $coluna, $valor, $id ){
+        switch ($coluna) {
+            case 'DESCRICAO':
+                $sql = "UPDATE AGENDA SET DESCRICAO=:valor  WHERE ID = :id";
+                break;
+            case 'TITULO':
+                $sql = "UPDATE AGENDA SET TITULO=:valor  WHERE ID = :id";
+                break;
+            case 'DATA_':
+                $sql = "UPDATE AGENDA SET DATA_=:valor  WHERE ID = :id";
+                break;
+            default:
+                $sql = "UPDATE AGENDA SET TITULO=:valor  WHERE ID = :id";
+                break;
+        }
+        $statement = self::$con->prepare($sql);
+        $statement->bindParam(":valor", $valor);
+        $statement->bindParam(":id", $id);
+        $statement->execute();
+    }
 }
 
 

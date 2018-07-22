@@ -1,7 +1,6 @@
 <?php 
 class Insert extends Conexao {
-
-
+    
     public static function inserir_usuario( $usuario, $email, $telefone, $descricao){
      
         $sql = "INSERT INTO USUARIO (NOME, EMAIL, TELEFONE, DESCRICAO) VALUES ( :nome, :email, :telefone, :descricao)";
@@ -16,7 +15,6 @@ class Insert extends Conexao {
 
     public static function inserir_evento( $usuario, $descricao, $titulo, $dia, $horario){
         $data_evento = $dia.' '.$horario.':00';
-        print $data_evento;
         $sql = "INSERT INTO AGENDA (USUARIO_ID, DESCRICAO, TITULO, DATA_) VALUES ( :id_usuario, :descricao, :titulo, :data_)";
         $statement = self::$con->prepare($sql);
         $statement->bindParam(':id_usuario', $usuario);
@@ -24,7 +22,6 @@ class Insert extends Conexao {
         $statement->bindParam(':titulo', $titulo);
         $statement->bindParam(':data_', $data_evento);
         $exec = $statement->execute();
-        //var_dump($exec);
         return $exec;
     }
 }

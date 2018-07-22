@@ -1,5 +1,4 @@
 <?php 
-require_once 'classes/conexao.class.php';
 
 if( isset($_POST['novo'])){
 

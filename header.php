@@ -12,3 +12,4 @@
     ?>
     <?php require_once 'classes/conexao.class.php'; ?>
 </head>
+<body>

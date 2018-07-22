@@ -26,7 +26,22 @@ class Conexao {
     public static function desconectar(){
         self::$con = null;
     }
+    //Verificações
+    public function verifica_nome(){
+        return;
+    }
 
+    public function verifica_email(){
+        return;
+    }
+
+    public function verifica_telefone(){
+        return;
+    }
+
+    public function verifica_descricao(){
+        return;
+    }
 }
 
 

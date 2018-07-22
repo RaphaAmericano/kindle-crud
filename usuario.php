@@ -1,36 +1,6 @@
-<?php include('header.php'); 
-$banco = new Select();
-
-if(isset($_GET['usuarios'])){
-    $usuario = $_GET['usuarios'];
-    $retorno = $banco->selecionar_usuario($usuario);
-    $agenda = $banco->selecionar_eventos($usuario);
-} 
-
-if(isset($_POST['edita'])){ 
-    var_dump($_POST['edita']);
-    $banco_update = new Update();
-    if(!empty($_POST['edita']['nome'])){
-        $banco_update->alterar_usuario('NOME', $_POST['edita']['nome'], $_POST['edita']['id']);
-    };
-    if(!empty($_POST['edita']['email'])){
-        $banco_update->alterar_usuario('EMAIL', $_POST['edita']['email'], $_POST['edita']['id']);
-    };
-    if(!empty($_POST['edita']['telefone'])){
-        $banco_update->alterar_usuario('TELEFONE', $_POST['edita']['telefone'], $_POST['edita']['id']);
-    };
-    if(!empty($_POST['edita']['descricao'])){
-        $banco_update->alterar_usuario('DESCRICAO', $_POST['edita']['descricao'], $_POST['edita']['id']);
-    };
-    $retorno = $banco->selecionar_usuario($_POST['edita']['id']);
-}
-if(isset($_POST['agenda'])){
-    $insert_agenda = new Insert();
-    $evento = $insert_agenda->inserir_evento($_POST['agenda']['id'], $_POST['agenda']['descricao'], $_POST['agenda']['nome'], $_POST['agenda']['dia'],$_POST['agenda']['horario']);
-    $retorno = $banco->selecionar_usuario($_POST['agenda']['id']);
-    $agenda = $banco->selecionar_eventos($_POST['agenda']['id']);
-}
-
+<?php 
+    include('header.php'); 
+    include('backend/usuario.backend.php');
 ?>
 
 <h2>Usuario</h2>
@@ -61,6 +31,11 @@ if(isset($_POST['agenda'])){
         </form>
     </tr>
 </table>
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+    <input type="hidden" name="apagar">
+    <input type="submit" value="apagar">
+</form>
+
 
 <h2>Agenda</h2>
 <table>
@@ -68,16 +43,41 @@ if(isset($_POST['agenda'])){
         <th>Título</th>
         <th>Descrição</th>
         <th>Data</th>
+        <th>Editar</th>
     </tr>
     <?php if(!empty($agenda)):?>
-
+    <?php foreach ($agenda as $key ): ?>   
+    <?php if($key['USUARIO_ID'] == $retorno['ID']): ?>
+    <tr>         
+        <td><?php print $key['USUARIO_ID']; ?></td>
+        <td><?php print $key['TITULO']; ?></td>
+        <td><?php print $key['DESCRICAO']; ?></td>
+        <td><time datetime="<?php print $key['DATA_']; ?>"><?php print $key['DATA_']; ?></time></td>
+        <td><button class="btn_editar" value="<?php print $key["ID"]; ?>">Editar</button><button class="btn_apagar" value="<?php print $key["ID"]; ?>">Apagar</button></td>
+    </tr>
+    <?php endif; ?>
+    <?php endforeach ?>
     <?php else: ?>
     <tr>
         <td colspan="3">Não há eventos</td>
     </tr>
     <?php endif; ?>
 </table>
-
+<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" style="display:none;" class="form_editar_evento">
+    <h3>Editar Evento</h3>
+    <label for="agenda_edita[nome]">Nome</label>
+    <input type="text" name="agenda_edita[nome]">
+    <label for="agenda_edita[descricao]">Dia</label>
+    <input type="date" name="agenda_edita[dia]">
+    <label for="agenda_edita[descricao]">Horário</label>
+    <input type="time" name="agenda_edita[horario]">
+    <label for="agenda_edita[descricao]">Descricão</label>
+    <textarea name="agenda_edita[descricao]"></textarea>
+    <input type="submit" value="Editar">
+    <input type="hidden" name="agenda_edita[id_usuario]" value="<?php echo $retorno['ID']; ?>">
+    <input type="hidden" name="agenda_edita[id]" value="0">
+</form>
+<h3>Novo Evento</h3>
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
     <label for="agenda[nome]">Nome</label>
     <input type="text" name="agenda[nome]">
@@ -90,3 +90,6 @@ if(isset($_POST['agenda'])){
     <input type="submit" value="Novo">
     <input type="hidden" name="agenda[id]" value="<?php echo $retorno['ID']; ?>">
 </form>
+<script src="js/script.js"></script>
+</body>
+</html>
