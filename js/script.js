@@ -4,6 +4,7 @@
     $form_editar_evento = document.getElementsByClassName("form_editar_evento")[0];
     $form_apagar_evento = document.getElementsByClassName("form_apagar_evento")[0];
     
+    
     $campo_id_form = document.getElementsByName("agenda_edita[id]")[0];
     $campo_id_apagar_form = document.getElementsByName("apagar_evento[id]")[0];
 
@@ -57,23 +58,62 @@
         var nome = $form_cadastro_usuario.getElementsByTagName('input')[0].value;
         var email = $form_cadastro_usuario.getElementsByTagName('input')[1].value;
         var telefone = $form_cadastro_usuario.getElementsByTagName('input')[2].value;
-        var descricao = $form_cadastro_usuario.getElementsByTagName('textarea')[0].textContent;
+        var descricao = $form_cadastro_usuario.getElementsByTagName('textarea')[0].value;
+
+        if(nome == ""){
+            e.preventDefault();    
+            alert("Nome Invalido");
+        }
+
+        if(descricao == ""){
+            e.preventDefault();    
+            alert("Descricao Invalida");
+        }
 
         if(validar_email(email) == false ){
             e.preventDefault();    
             alert("Email Invalido");
         }
 
-        if(telefone.match(/[a-z]/i) || telefone.match(/[!@#$%^&*(),.?":{}|<>]/g) ){
+        if(telefone == "" || telefone.match(/[a-z]/i) || telefone.match(/[!@#$%^&*(),.?":{}|<>]/g) ){
             e.preventDefault();    
             alert("Telefone invalido");
         }
 
     }); 
 
+    //validacao de novo evento
+    $form_novo_evento = document.getElementsByClassName("form_novo_evento")[0];
+    $form_novo_evento.addEventListener('submit', function(e){
+        var nome = $form_novo_evento.getElementsByTagName('input')[0].value;
+        var dia = $form_novo_evento.getElementsByTagName('input')[1].value;
+        var horario = $form_novo_evento.getElementsByTagName('input')[2].value;
+        var descricao = $form_novo_evento.getElementsByTagName('textarea')[0].value;
+
+        if(nome == ""){
+            e.preventDefault();    
+            alert("Nome Invalido");
+        }
+
+        if(descricao == ""){
+            e.preventDefault();    
+            alert("Descricao Invalida");
+        }
+
+        if(dia == ""){
+            e.preventDefault();    
+            alert("Dia é obrigatório");
+        }
+
+        if(horario == ""){
+            e.preventDefault();    
+            alert("Horário obrigatório");
+        }
+    });
+
     //funcoes de validacao
     function validar_email(valor){
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var re = /^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/;
         return re.test(String(valor).toLowerCase());
     }
 

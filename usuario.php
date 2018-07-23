@@ -87,7 +87,7 @@
     <input type="hidden" name="agenda_edita[id]" value="0">
 </form>
 <h3>Novo Evento</h3>
-<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" class="form_novo_evento">
     <label for="agenda[nome]">Nome</label>
     <input type="text" name="agenda[nome]">
     <label for="agenda[descricao]">Dia</label>

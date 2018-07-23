@@ -27,7 +27,7 @@ class Conexao {
         self::$con = null;
     }
     //Verificações
-    public function verifica_nome($valor){
+    public static function verifica_nome($valor){
         if(!empty($valor)){
             $valor = trim($valor);
             return $valor;
@@ -35,7 +35,7 @@ class Conexao {
         return false;
     }
 
-    public function verifica_email($valor){
+    public static function verifica_email($valor){
         $valor = trim($valor);
         if(filter_var($valor, FILTER_VALIDATE_EMAIL)){
             return $valor;
@@ -43,16 +43,28 @@ class Conexao {
         return false;
     }
 
-    public function verifica_telefone($valor){
+    public static function verifica_telefone($valor){
         $valor = trim($valor);
-        if($valor == 10 || $valor == 11){
-
+        if( is_numeric($valor) && (strlen($valor) == 10 || strlen($valor) == 11)){
+            return $valor;
         }
-        return;
+        return false;
     }
 
-    public function verifica_descricao(){
-        return;
+    public static function verifica_descricao($valor){
+        if(!empty($valor)){
+            $valor = trim($valor);
+            return $valor;
+        }
+        return false;
+    }
+
+    public static function verifica_data($valor){
+        if(!empty($valor) && strlen($valor) == 19 ){
+            $valor = trim($valor);
+            return $valor;
+        }
+        return false;
     }
 }
 

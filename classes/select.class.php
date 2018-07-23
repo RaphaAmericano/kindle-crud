@@ -21,12 +21,10 @@ class Select extends Conexao {
     public static function selecionar_eventos($id){
         
         $statement = self::$con->prepare("SELECT * FROM USUARIO INNER JOIN AGENDA ON USUARIO.ID=AGENDA.USUARIO_ID");
-        //$statement.bindParam(":id", $id);
+       
         $statement->execute();
         $retorno = $statement->fetchAll(); 
-        // foreach ($resultado as $key => $value) {
-        //     $retorno[$key] = $value;
-        // }
+        
         return $retorno;
     }
 
